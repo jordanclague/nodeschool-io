@@ -1,11 +1,15 @@
 var fs = require('fs');
+var directory = process.argv[2];
+var fileExtension = process.argv[3];
 
-var buffer = fs.readFile(process.argv[2], function callback(err, data) {
-  if (!err) {
-    var numberOfNewLines = data.toString().split('\n');
-    console.log(numberOfNewLines.length - 1);
-  }
-  else {
+fs.readdir(directory, function callback (err, list) {
+  if (err) {
     console.log(err);
   }
-})
+
+  list.forEach(function (item) {
+    if (item.split('.')[1] == fileExtension) {
+      console.log(item);
+    }
+  });
+});
