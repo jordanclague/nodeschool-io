@@ -1,8 +1,6 @@
-var numbers = process.argv.slice(2);
+var fs = require('fs');
 
-var total = 0;
-for (i = 0; i < numbers.length; i++) {
-  total = total + parseInt(numbers[i]);
-}
+var buffer = fs.readFileSync(process.argv[2]);
+var numberOfNewLines = buffer.toString().split('\n');
 
-console.log(total);
+console.log(numberOfNewLines.length - 1);
