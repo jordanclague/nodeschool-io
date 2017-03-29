@@ -1,15 +1,11 @@
-var directory = process.argv[2];
-var fileExtension = process.argv[3];
-var fn = require('./functions');
+var http = require('http');
 
-var callback = function (err, data) {
-  if (err) {
-    console.log(err);
-  }
-  
-  data.forEach(function (item) {
-    console.log(item);
+http.get(process.argv[2], function (response) {
+  response.setEncoding('utf-8');
+  response.on('error', function () {
+    console.error;
+  })
+  response.on('data', function (data) {
+    console.log(data);
   });
-};
-
-fn(directory, fileExtension, callback);
+});
