@@ -1,15 +1,15 @@
-var fs = require('fs');
 var directory = process.argv[2];
 var fileExtension = process.argv[3];
+var fn = require('./functions');
 
-fs.readdir(directory, function callback (err, list) {
+var callback = function (err, data) {
   if (err) {
     console.log(err);
   }
-
-  list.forEach(function (item) {
-    if (item.split('.')[1] == fileExtension) {
-      console.log(item);
-    }
+  
+  data.forEach(function (item) {
+    console.log(item);
   });
-});
+};
+
+fn(directory, fileExtension, callback);
