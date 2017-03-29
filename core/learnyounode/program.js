@@ -1,11 +1,14 @@
 var http = require('http');
+var bl = require('bl');
 
 http.get(process.argv[2], function (response) {
-  response.setEncoding('utf-8');
-  response.on('error', function () {
-    console.error;
-  })
-  response.on('data', function (data) {
+  response.pipe(bl(function (err, data) {
+    if (err) {
+      console.error;
+    }
+    
+    data = data.toString();
+    console.log(data.length);
     console.log(data);
-  });
+  }));
 });
